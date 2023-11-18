@@ -1,26 +1,13 @@
 import React from 'react';
 
-function WordInput() {
-  const [wordInput, setWordInput] = React.useState({
-    word: "",
-    id: ""
-  });
-  function handleWordInput(event) {
+function WordInput({ handleGuesses }) {
+  const [wordInput, setWordInput] = React.useState("");
 
-    const inputWord = event.target.value.toUpperCase()
-      const nextWordInput = {
-      word: inputWord,
-      id: Math.random()
-      }
-    setWordInput(nextWordInput)
-  }
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("Form submitted with word:", wordInput.word);
-    setWordInput({
-      word: "",
-      id: ""
-    })
+    console.log("Form submitted with word:", wordInput);
+    handleGuesses(wordInput)
+    setWordInput("")
   }
   return <div>
     <form className="guess-input-wrapper"
@@ -33,11 +20,13 @@ function WordInput() {
   maxLength={5}
   pattern="[a-zA-Z]{5}"
   title="5 letter word"
+  value={wordInput}
+  onChange={(event) => {
+    const nextWord = event.target.value.toUpperCase()
+    setWordInput(nextWord)
+  }}
   id="guess-input"
   type="text"
-  value={wordInput.word}
-  onChange={handleWordInput}
-  // key={wordInput.id}
   />
 </form>
   </div>;
