@@ -15,8 +15,6 @@ function Game() {
   function handleGuesses(wordInput) {
     const nextGuesses = [...guesses, wordInput]
     setGuesses(nextGuesses);
-    console.log(guesses)
-    console.log(wordInput)
   }
   return (<>
   <GuessResults guesses={guesses}></GuessResults>
